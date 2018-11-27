@@ -1,28 +1,46 @@
-import React, { Component } from 'react';
-import logo from './logo.svg';
+import React, {Component} from 'react';
 import './App.css';
 
 class App extends Component {
-  render() {
-    return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
-      </div>
-    );
-  }
+	state = {count: 0};
+
+	incrementCount = (incrementValue) => {
+		// this.setState({count: this.state.count + 1}); 			// bad since it causes performance issues when called multiple times
+		this.setState((prevState) => ({
+			count: prevState.count + incrementValue
+		}))
+	};
+
+	render() {
+		return (
+			<div>
+				<Button onClickFunction={this.incrementCount} incrementValue={1}/>
+				<Button onClickFunction={this.incrementCount} incrementValue={2}/>
+				<Button onClickFunction={this.incrementCount} incrementValue={5}/>
+				<Button onClickFunction={this.incrementCount} incrementValue={10}/>
+				<Result label={this.state.count}/>
+			</div>
+		)
+	}
 }
+
+class Button extends React.Component {
+
+	handleClick = () => {
+		this.props.onClickFunction(this.props.incrementValue)
+	};
+
+	render() {
+		return (
+			<button onClick={this.handleClick}> + {this.props.incrementValue} </button>
+		)
+	}
+}
+
+const Result = (props) => {
+	return (
+		<div>{props.label}</div>
+	)
+};
 
 export default App;
