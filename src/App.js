@@ -14,11 +14,12 @@ class App extends Component {
 	render() {
 		return (
 			<div>
-				<Button onClickFunction={this.incrementCount} incrementValue={1}/>
+				<CardList/>
+				{/*<Button onClickFunction={this.incrementCount} incrementValue={1}/>
 				<Button onClickFunction={this.incrementCount} incrementValue={2}/>
 				<Button onClickFunction={this.incrementCount} incrementValue={5}/>
 				<Button onClickFunction={this.incrementCount} incrementValue={10}/>
-				<Result label={this.state.count}/>
+				<Result label={this.state.count}/>*/}
 			</div>
 		)
 	}
@@ -40,6 +41,26 @@ class Button extends React.Component {
 const Result = (props) => {
 	return (
 		<div>{props.label}</div>
+	)
+};
+
+const Card = (props) => {
+	return (
+		<div style={{margin: '1em'}}>
+			<img src="http://www.placehold.it/75"/>
+			<div className="info">
+				<div className="text">{props.name}</div>
+				<div className="text">{props.company}</div>
+			</div>
+		</div>
+	)
+};
+
+const CardList = (props) => {
+	return (
+		<div>
+			<Card name="Sahil" company='Target'/>
+		</div>
 	)
 };
 

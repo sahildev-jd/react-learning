@@ -30,3 +30,14 @@
     transform: rotate(360deg);
   }
 }
+
+.info {
+  color: red;
+  display: inline-block;
+  margin-left: 10px;
+}
+
+.text {
+  font-size: 1.25em;
+  font-weight: bold;
+}
