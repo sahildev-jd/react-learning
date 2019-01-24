@@ -1,8 +1,7 @@
 import React from 'react';
 import './App.css';
-import axios from 'axios';
-
-const githubUsersApi = 'https://api.github.com/users/';
+import Form from './github-cards/Form';
+import ListOfCards from './github-cards/ListOfCards'
 
 class App extends React.Component {
 	// state = {count: 0};
@@ -25,7 +24,7 @@ class App extends React.Component {
 		return (
 			<div style={{margin: '12px'}}>
 				<Form onSubmit={this.addNewCard}/>
-				<CardList cards={this.state.cards}/>
+				<ListOfCards cards={this.state.cards}/>
 				{/*<Button onClickFunction={this.incrementCount} incrementValue={1}/>
 				<Button onClickFunction={this.incrementCount} incrementValue={2}/>
 				<Button onClickFunction={this.incrementCount} incrementValue={5}/>
@@ -54,62 +53,5 @@ class App extends React.Component {
 // 		<div>{props.label}</div>
 // 	)
 // };
-
-const Card = (props) => {
-	return (
-		<div style={{margin: '1em'}}>
-			<img src={props.avatar_url} width="75" alt=""/>
-			<div style={{
-				display: 'inline-block',
-				marginLeft: '10'
-			}}>
-				<div style={{
-					fontWeight: 'bold',
-					fontSize: '1.25em'
-				}}>{props.name}</div>
-				<div>{props.company}</div>
-			</div>
-		</div>
-	)
-};
-
-const CardList = (props) => {
-	return (
-		<div>
-			{props.cards.map((card) => <Card key={card.id} {...card}/>)}
-		</div>
-	)
-};
-
-class Form extends React.Component {
-	state = {userName: ''};
-
-	handleClick = (event) => {
-		event.preventDefault();
-
-		axios.get(githubUsersApi + this.state.userName).then((response) => {
-			this.props.onSubmit(response.data);
-
-			this.setState({userName: ''});
-		});
-	};
-
-	render() {
-		return (<form onSubmit={this.handleClick}>
-			<input type='text'
-				   placeholder='Enter Github username'
-				   ref={(input) => {
-					   this.inputName = input;
-				   }}
-				   value={this.state.userName}
-				   onChange={(event) => {
-					   this.setState({userName: event.target.value})
-				   }}
-				   required/>
-			<button type='submit'>Add Card</button>
-		</form>)
-
-	}
-}
 
 export default App;
