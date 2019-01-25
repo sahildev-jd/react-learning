@@ -1,0 +1,26 @@
+MaterialIcon {
+	margin: 0.5em;
+	font-size: 40px;
+}
+
+span {
+	display: inline-block;
+	margin: 0.5em;
+	text-align: center;
+	background-color: #CCCCCC;
+	border-radius: 50%;
+	width: 24px;
+	cursor: pointer;
+}
+
+.used {
+	background-color: #eee;
+	color: #ddd;
+	cursor: not-allowed;
+}
+
+.selected {
+	background-color: #aaa;
+	color: #ddd;
+	cursor: not-allowed;
+}
