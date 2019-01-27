@@ -13,13 +13,13 @@ class App extends React.Component {
 	// 		count: prevState.count + incrementValue
 	// 	}))
 	// };
-	state = {cards: []};
+	// state = {cards: []};
 
-	addNewCard = (cardInfo) => {
-		this.setState((prevState) => ({
-			cards: prevState.cards.concat(cardInfo)
-		}));
-	};
+	// addNewCard = (cardInfo) => {
+	// 	this.setState((prevState) => ({
+	// 		cards: prevState.cards.concat(cardInfo)
+	// 	}));
+	// };
 
 	render() {
 		return (
