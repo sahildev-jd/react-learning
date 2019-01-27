@@ -1,5 +1,6 @@
 import React from 'react';
-import {Answer, Button, Stars, Numbers} from './constants';
+import {Answer, EqualsButton, Stars, Numbers} from './constants';
+import _ from 'lodash';
 
 class Game extends React.Component {
 
@@ -7,20 +8,34 @@ class Game extends React.Component {
 		super();
 		this.state = {
 			selectedNumbers: [],
-			noOfStars: 1 + Math.floor(Math.random() * 9)
+			noOfStars: 1 + Math.floor(Math.random() * 9),
+			answerIsCorrect: null
 		}
 	}
 
-	addSelectedNumber = (numbers) => {
-		if(this.state.selectedNumbers.includes(numbers)) {
+	addSelectedNumber = (selectedNumber) => {
+		if(this.state.selectedNumbers.includes(selectedNumber)) {
 			return;
 		}
 		this.setState(prevState => ({
-			selectedNumbers: prevState.selectedNumbers.concat(numbers)
+			selectedNumbers: prevState.selectedNumbers.concat(selectedNumber)
+		}));
+	};
+
+	removeSelectedNumber = (selectedNumber) => {
+		this.setState(prevState => ({
+			selectedNumbers: _.filter(prevState.selectedNumbers, (number) => number !== selectedNumber)
+		}));
+	};
+
+	checkAnswer = () => {
+		this.setState(prevState => ({
+			answerIsCorrect: _.reduce(prevState.selectedNumbers, (a, b) => a + b, 0)
 		}));
 	};
 
 	render() {
+		const {selectedNumbers, noOfStars, answerIsCorrect} = this.state;
 		return (
 			<div style={{
 				display: 'flex',
@@ -33,12 +48,16 @@ class Game extends React.Component {
 					justifyContent: 'space-between',
 					alignItems: 'center'
 				}}>
-					<Stars noOfStars={this.state.noOfStars}/>
-					<Button/>
-					<Answer selectedNumbers={this.state.selectedNumbers}/>
+					<Stars noOfStars={noOfStars}/>
+					<EqualsButton selectedNumbers={selectedNumbers}
+								  checkAnswer={this.checkAnswer}
+								  answerIsCorrect={answerIsCorrect}/>
+					<Answer selectedNumbers={selectedNumbers}
+							removeSelectedNumber={this.removeSelectedNumber}/>
 				</div>
 				<br/>
-				<Numbers selectedNumbers={this.state.selectedNumbers} addSelectedNumber={this.addSelectedNumber}/>
+				<Numbers selectedNumbers={selectedNumbers}
+						 addSelectedNumber={this.addSelectedNumber}/>
 			</div>
 		)
 	};

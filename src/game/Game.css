@@ -3,7 +3,7 @@ MaterialIcon {
 	font-size: 40px;
 }
 
-span {
+.number {
 	display: inline-block;
 	margin: 0.5em;
 	text-align: center;
