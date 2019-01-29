@@ -2,7 +2,6 @@ import React from 'react';
 import MaterialIcon from 'material-icons-react';
 import './Game.css';
 import _ from 'lodash';
-import {Button} from 'react-md';
 
 export const Stars = (props) => {
 	return (
@@ -21,22 +20,26 @@ export const EqualsButton = (props) => {
 	let button;
 	switch(props.answerIsCorrect) {
 		case true:
-			button = <Button raised primary>
-			</Button>;
+			button = <button style={{backgroundColor: 'green'}}
+							 onClick={props.acceptAnswer}><i className="material-icons">check</i></button>;
 			break;
 		case false:
-			button = <Button raised secondary>
-			</Button>;
+			button = <button style={{backgroundColor: 'red'}}><i className="material-icons">error</i></button>;
 			break;
 		default:
-			button = <Button disabled={props.selectedNumbers.length === 0}
-							 raised
-							 primary
-							 onClick={props.checkAnswer}>=</Button>;
+			button = <button disabled={props.selectedNumbers.length === 0}
+							 onClick={props.checkAnswer}><i className="material-icons">drag_handle</i></button>;
 	}
 	return (
 		<div>
 			{button}
+			<br/>
+			<br/>
+			<button className="btn btn-warning btn-sm"
+					onClick={props.redrawStars}
+					disabled={props.redraws === 0}>
+				<i className="material-icons">refresh</i>{props.redraws}
+			</button>
 		</div>
 	);
 };
@@ -60,7 +63,7 @@ export const Answer = (props) => {
 
 export const Numbers = (props) => {
 	const getClassForNumber = (number) => {
-		return props.selectedNumbers.includes(number) ? 'selected number' : 'number';
+		return props.selectedNumbers.includes(number) ? 'selected number' : props.usedNumbers.includes(number) ? 'used number' : 'number';
 	};
 
 	return (
@@ -77,5 +80,11 @@ export const Numbers = (props) => {
 		</div>
 	);
 };
+
+export const DoneStatus = (props) => <div style={{
+	display: 'flex',
+	justifyContent: 'center',
+	fontSize: '24px'
+}}>Game Over!</div>;
 
 Numbers.list = _.range(1, 10);

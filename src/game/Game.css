@@ -14,13 +14,13 @@ MaterialIcon {
 }
 
 .used {
-	background-color: #eee;
+	background-color: green;
 	color: #ddd;
 	cursor: not-allowed;
 }
 
 .selected {
-	background-color: #aaa;
+	background-color: #eee;
 	color: #ddd;
 	cursor: not-allowed;
 }
