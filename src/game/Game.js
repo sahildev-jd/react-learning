@@ -79,7 +79,7 @@ class Game extends React.Component {
 		possibleCombinationSum(possibleNumbers, noOfStars);
 	};
 
-	resetGame = () => console.log(1)/*this.setState(Game.initialState())*/;
+	resetGame = () => this.setState(Game.initialState());
 
 	render() {
 		const {selectedNumbers, noOfStars, answerIsCorrect, usedNumbers, redraws, doneStatus} = this.state;

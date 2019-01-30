@@ -8,7 +8,7 @@ export const Stars = (props) => {
 		<div style={{
 			display: 'flex',
 			flexWrap: 'wrap',
-			width: '30%'
+			width: '40%'
 		}}>{_.map(_.range(props.noOfStars), (x, i) =>
 			(<MaterialIcon key={i} icon="star" size={40}/>)
 		)}
@@ -86,10 +86,10 @@ export const DoneStatus = (props) => {
 		<div style={{
 			display: 'flex',
 			justifyContent: 'center',
-			fontSize: '24px'
+			alignItems: 'center',
+			flexDirection: 'column'
 		}}>
-			<h5>{props.doneStatus}</h5>
-			<br/>
+			<h2>{props.doneStatus}</h2>
 			<button className="btn btn-secondary"
 					onClick={props.resetGame}>Plan again
 			</button>
