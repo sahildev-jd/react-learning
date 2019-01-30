@@ -4,10 +4,8 @@ import _ from 'lodash';
 
 class Game extends React.Component {
 	static randomNumber = () => 1 + Math.floor(Math.random() * 9);
-
-	constructor() {
-		super();
-		this.state = {
+	static initialState = () => {
+		return {
 			selectedNumbers: [],
 			noOfStars: Game.randomNumber(),
 			answerIsCorrect: null,
@@ -15,6 +13,11 @@ class Game extends React.Component {
 			redraws: 5,
 			doneStatus: null
 		}
+	};
+
+	constructor(props) {
+		super(props);
+		this.state = Game.initialState();
 	}
 
 	addSelectedNumber = (selectedNumber) => {
@@ -46,7 +49,7 @@ class Game extends React.Component {
 			selectedNumbers: [],
 			noOfStars: Game.randomNumber(),
 			answerIsCorrect: null,
-		}));
+		}), this.updateDoneStatus);
 	};
 
 	redrawStars = () => {
@@ -58,15 +61,15 @@ class Game extends React.Component {
 			noOfStars: Game.randomNumber(),
 			answerIsCorrect: null,
 			redraws: prevState.redraws - 1
-		}));
+		}), this.updateDoneStatus);
 	};
 
 	updateDoneStatus = () => {
 		this.setState(prevState => {
 			if(prevState.usedNumbers.length === 9) {
 				return {doneStatus: 'Done! Nice Work!'};
-			} else if(prevState.redraws === 0 && this.possibleSolutions(prevState)) {
-				return {doneStatus: 'Better Luck next time!'};
+			} else if(prevState.redraws === 0 && !this.possibleSolutions(prevState)) {
+				return {doneStatus: 'Better luck next time!'};
 			}
 		});
 	};
@@ -75,6 +78,8 @@ class Game extends React.Component {
 		const possibleNumbers = _.filter(_.range(1, 10), (x) => usedNumbers.indexOf(x) === -1);
 		possibleCombinationSum(possibleNumbers, noOfStars);
 	};
+
+	resetGame = () => console.log(1)/*this.setState(Game.initialState())*/;
 
 	render() {
 		const {selectedNumbers, noOfStars, answerIsCorrect, usedNumbers, redraws, doneStatus} = this.state;
@@ -85,6 +90,7 @@ class Game extends React.Component {
 				width: '30%'
 			}}>
 				<h1>Play 9</h1>
+
 				<div style={{
 					display: 'flex',
 					justifyContent: 'space-between',
@@ -104,10 +110,12 @@ class Game extends React.Component {
 				</div>
 				<br/>
 
-				{doneStatus ? <DoneStatus doneStatus={doneStatus}/> : <Numbers selectedNumbers={selectedNumbers}
-																			   addSelectedNumber={this.addSelectedNumber}
-																			   usedNumbers={usedNumbers}/>}
-
+				{doneStatus ?
+					<DoneStatus doneStatus={doneStatus}
+								resetGame={this.resetGame}/> :
+					<Numbers selectedNumbers={selectedNumbers}
+							 addSelectedNumber={this.addSelectedNumber}
+							 usedNumbers={usedNumbers}/>}
 			</div>
 		)
 	};

@@ -81,10 +81,20 @@ export const Numbers = (props) => {
 	);
 };
 
-export const DoneStatus = (props) => <div style={{
-	display: 'flex',
-	justifyContent: 'center',
-	fontSize: '24px'
-}}>Game Over!</div>;
+export const DoneStatus = (props) => {
+	return (
+		<div style={{
+			display: 'flex',
+			justifyContent: 'center',
+			fontSize: '24px'
+		}}>
+			<h5>{props.doneStatus}</h5>
+			<br/>
+			<button className="btn btn-secondary"
+					onClick={props.resetGame}>Plan again
+			</button>
+		</div>
+	);
+};
 
 Numbers.list = _.range(1, 10);
