@@ -1,7 +1,8 @@
 import React from 'react';
 import './App.css';
-import Form from './github-cards/Form';
-import ListOfCards from './github-cards/ListOfCards'
+// import Form from './github-cards/Form';
+// import ListOfCards from './github-cards/ListOfCards'
+import Game from './game/Game'
 
 class App extends React.Component {
 	// state = {count: 0};
@@ -12,24 +13,25 @@ class App extends React.Component {
 	// 		count: prevState.count + incrementValue
 	// 	}))
 	// };
-	state = {cards: []};
+	// state = {cards: []};
 
-	addNewCard = (cardInfo) => {
-		this.setState((prevState) => ({
-			cards: prevState.cards.concat(cardInfo)
-		}));
-	};
+	// addNewCard = (cardInfo) => {
+	// 	this.setState((prevState) => ({
+	// 		cards: prevState.cards.concat(cardInfo)
+	// 	}));
+	// };
 
 	render() {
 		return (
 			<div style={{margin: '12px'}}>
-				<Form onSubmit={this.addNewCard}/>
-				<ListOfCards cards={this.state.cards}/>
 				{/*<Button onClickFunction={this.incrementCount} incrementValue={1}/>
 				<Button onClickFunction={this.incrementCount} incrementValue={2}/>
 				<Button onClickFunction={this.incrementCount} incrementValue={5}/>
 				<Button onC lickFunction={this.incrementCount} incrementValue={10}/>
 				<Result label={this.state.count}/>*/}
+				{/*<Form onSubmit={this.addNewCard}/>*/}
+				{/*<ListOfCards cards={this.state.cards}/>*/}
+				<Game/>
 			</div>
 		)
 	}
